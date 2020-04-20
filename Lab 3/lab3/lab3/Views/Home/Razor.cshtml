@@ -1,0 +1,37 @@
+﻿<h2>Table</h2>
+<table border="1" style="width: 100%; height: 25%;">
+    @for (var i = 0; i <= 3; i++)
+    {
+        <tr>
+            @for (var y = 1; y <= 10; y++)
+            {
+                <td>@(y + 10*i)</td>
+            }
+        </tr>
+    }
+</table>
+
+<br />
+<h2>99 Bottles of Beer</h2>
+@{
+    var beers = 99;
+    while (beers >= 0)
+    {
+        if (beers < 50)
+        {
+            <p>awwww :(</p>
+        }
+        else if (beers % 20 == 0)
+        {
+            <p>WOOO!!</p>
+        }
+        else
+        {
+            <p>@beers Bottles of Beer on the Wall. You take one down, pass it around, @(beers-1)</p>
+        }
+        beers--;
+    }
+}
+
+<br />
+@Html.ActionLink("Go Home You're Drunk", "Index", "Home")

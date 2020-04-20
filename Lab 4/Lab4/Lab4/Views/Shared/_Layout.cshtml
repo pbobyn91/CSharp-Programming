@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/css/Stylesheet.css">
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h3>Movie Database</h3>
+            <br />
+            @Html.ActionLink("Home", "Index", "Home")
+            &nbsp;&nbsp;&nbsp;
+            @Html.ActionLink("Add Movie", "AddMovie", "Home")
+        </div>
+    </header>
+
+    <div class="container" role="main">
+        @RenderBody()
+        <br />
+        <br />
+        <br />
+    </div>
+
+    <footer>
+        <p class="text-muted">© 2020 - Patrick Bobyn</p>
+    </footer>
+</body>
+</html>

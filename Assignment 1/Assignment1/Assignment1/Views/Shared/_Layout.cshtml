@@ -1,0 +1,63 @@
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <meta name="x-stylesheet-fallback-test" content="" class="sr-only" />
+    <script>!function (a, b, c, d) { var e, f = document, g = f.getElementsByTagName("SCRIPT"), h = g[g.length - 1].previousElementSibling, i = f.defaultView && f.defaultView.getComputedStyle ? f.defaultView.getComputedStyle(h) : h.currentStyle; if (i && i[a] !== b) for (e = 0; e < c.length; e++)f.write('<link href="' + c[e] + '" ' + d + "/>") }("position", "absolute", ["\/lib\/bootstrap\/dist\/css\/bootstrap.min.css"], "rel=\u0022stylesheet\u0022 ");</script>
+    <link rel="stylesheet" href="/css/site.min.css?v=kHvJwvVAK1eJLN4w8xygUR3nbvlLmRwi5yr-OuAO90E" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Assignment 1</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                @if (Context.Session.GetInt32("_userId") != null && Context.Session.GetInt32("_roleId") == 2)
+                {
+                    <li>
+                        <a asp-controller="Home" class="nav-link" asp-action="AddBlogPost">Add Blog Post</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Home" class="nav-link" asp-action="Logoff">Logoff</a>
+                    </li>
+                }
+                else
+                {
+                    <li><a asp-controller="Home" class="nav-link" asp-action="Register">Register</a></li>
+                    <li><a asp-controller="Home" class="nav-link" asp-action="Login">Login</a></li>
+                }
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" role="main">
+        @{
+            if (Context.Session.GetInt32("_userId") != null)
+            {
+                <div style="padding-bottom:9px; margin: 40px 0 20px; border-bottom: 1px solid #eee; box-sizing: border-box">
+                    <h2>Welcome, @Context.Session.GetString("_firstName") @Context.Session.GetString("_lastName")!</h2>
+                </div>
+            }
+        }
+        @RenderBody()
+        <br />
+        <br />
+        <br />
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">
+                &copy; 2020 - Assignment 1 - Patrick Bobyn - 040889706 - boby0003@algonquinlive.com
+            </p>
+        </div>
+    </footer>
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+</html>

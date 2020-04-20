@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Http
+@model IEnumerable<Assignment1.Models.BlogPost>
+@{
+    Layout = "_Layout";
+}
+
+<div class="col-12">
+    @if (Model.Count() == 0)
+    {
+        <div style="width: auto; display: block; border: 1px solid DarkGrey; margin: 10px 0px 10px 0px; padding: 0px 20px 5px 20px; border-radius: 10px;">
+             There are currently no blogs posted.<br/><br/>
+        </div>
+     }
+     else
+     {
+        @foreach (var item in Model)
+        {
+        <div style="width: auto; display: block; border: 1px solid DarkGrey; margin: 10px 0px 10px 0px; padding: 0px 20px 5px 20px; border-radius: 10px;">
+            <h3>
+                <a asp-controller="Home" asp-action="DisplayFullBlogPost" asp-route-id="@item.BlogPostId">@item.Title</a>
+            </h3>
+            <p>
+                @if (item.Content.Length < 100)
+                {
+                    @item.Content
+                }
+                else
+                {
+                    @item.Content.Substring(0, 99)
+                }
+                <br /><br />Posted on: @item.Posted.ToString(@"MMMM dd, yyyy")
+            </p>
+            @if (Context.Session.GetInt32("_userId") != null && Context.Session.GetInt32("_roleId") == 2)
+            {
+                <a asp-controller="Home" class="btn btn-sm btn-primary" asp-action="EditBlogPost" asp-route-id="@item.BlogPostId">Edit Post</a>
+            }
+        </div>
+        }
+    }
+</div>

@@ -1,0 +1,54 @@
+﻿@model Assignment1.Models.FullBlogPost
+@using Microsoft.AspNetCore.Http
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="mt-lg-4" style="margin-bottom: 4rem; width: 80%">
+    <h2 style="margin-bottom: .25rem; font-size: 2.5rem">@Model.blog.Title</h2>
+    <p style="margin-bottom: 1.25rem; color: #999">
+        <sub>Written By: @Model.user.FirstName @Model.user.LastName, @Model.user.EmailAddress</sub><br />
+        <sub>Posted on: @Model.blog.Posted.ToString(@"MMMM dd, yyyy")</sub>
+    </p>
+    <br /><br />
+    <p>
+        @Model.blog.Content
+    </p>
+    <br />
+    <h4>Comments</h4>
+    @foreach (var item in @Model.commentView)
+    {
+        <div style="width: auto; display: block; border: 1px solid DarkGrey; background-color: LightGrey; margin: 10px 0px 10px 0px; padding: 0px 20px 5px 20px; border-radius: 10px;">
+            <br />
+            @item.comment.Content
+            <br /><br />
+            <sub>By: @item.authorName , @item.authorEmail</sub><br /><br />
+        </div>
+    }
+    @{
+        <div style="width: auto; display: block; border: 1px solid DarkGrey; background-color: LightGrey; margin: 10px 0px 10px 0px; padding: 0px 20px 5px 20px; border-radius: 10px;">
+            <br />
+            @if (Context.Session.GetInt32("_userId") != null)
+            {
+                @using (Html.BeginForm("AddComment", "Home"))
+                {
+                    <fieldset>
+                        <label for="Content">Comment: </label><br />
+                        <textarea class="form-control" type="text" data-val="true" data-val-length-max="2048" id="Content" name="Content" required>
+                        </textarea>
+                        <input type="hidden" id="BlogPostId" name="BlogPostId" value="@Model.blog.BlogPostId" />
+                        <input type="hidden" id="UserId" name="UserId" value="@Context.Session.GetInt32("_userId")" />
+                        <br/><br/>
+                        <input type="submit" value="Comment" class="btn btn-outline-dark" />
+                    </fieldset>
+                }
+            }
+            else
+            {
+                <h4>Log in to add a Comment</h4>
+                <a asp-controller="Home" class="btn btn-sm btn-primary" asp-action="Login">Login</a>
+            }
+        </div>
+    }
+</div>

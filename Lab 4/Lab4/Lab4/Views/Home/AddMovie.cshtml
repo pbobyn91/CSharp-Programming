@@ -1,0 +1,36 @@
+﻿@model Lab4.Models.Movies
+@{
+    Layout = "_Layout";
+}
+
+<h2>Add Movie</h2>
+
+
+@using (Html.BeginForm("CreateMovie", "Home", FormMethod.Post))
+{
+<fieldset>
+    <div>
+        <label for="Title">Title</label>
+        <input type="text" data-val="true" data-val-length="The field Title must be a string with a maximum length of 1000." data-val-length-max="1000" data-val-required="The Title field is required." id="Title" name="Title" value="" />
+    </div>
+    <div>
+        <label for="SubTitle">SubTitle</label>
+        <input type="text" data-val="true" data-val-length="The field SubTitle must be a string with a maximum length of 1000." data-val-length-max="1000" data-val-required="The SubTitle field is required." id="SubTitle" name="SubTitle" value="" />
+    </div>
+    <div>
+        <label for="Description">Description</label>
+        <input type="text" data-val="true" data-val-length="The field Description must be a string with a maximum length of 1000." data-val-length-max="1000" data-val-required="The Description field is required." id="Description" name="Description" value="" />
+    </div>
+    <div>
+        <label for="Year">Year</label>
+        <input type="date" data-val="true" data-val-required="The Year field is required." id="Year" name="Year" value="" />
+    </div>
+    <div>
+        <label for="Rating">Rating</label>
+        <input type="number" data-val="true" data-val-range="The field Rating must be between 1 and 5." data-val-range-max="5" data-val-range-min="1" data-val-required="The Rating field is required." id="Rating" name="Rating" value="" />
+    </div>
+    <br />
+    <br />
+    <input type="submit" value="Add Movie" />
+</fieldset>
+}

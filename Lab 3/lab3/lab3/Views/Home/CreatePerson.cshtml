@@ -1,0 +1,43 @@
+﻿@model lab3.Model.Person
+<h1>Create Person</h1>
+
+@using (Html.BeginForm("DisplayPerson", "Home", FormMethod.Post))
+{
+    <fieldset>
+        <div>
+            <label for="firstName">First Name:</label>
+            <input type="text" asp-for="firstName" value="" />
+        </div>
+        <div>
+            <label for="lastName">Last Name:</label>
+            <input type="text" asp-for="lastName" value="" />
+        </div>
+        <div>
+            <label for="age">Age:</label>
+            <input type="number" asp-for="age" value="" />
+        </div>
+        <div>
+            <label for="email">Email Address:</label>
+            <input type="email" asp-for="email" value="" />
+        </div>
+        <div>
+            <label for="dob">Date of Birth:</label>
+            <input type="date" asp-for="dob" value="" />
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" asp-for="password" value="" />
+        </div>
+        <div>
+            <label for="desc">Description:</label>
+            <input type="text" asp-for="desc" value="" />
+        </div>
+        <div>
+            <label>Submit</label>
+            <input type="submit" name="Submit" class="submit" />
+        </div>
+    </fieldset>
+}
+
+<br />
+@Html.ActionLink("Go Home", "Index", "Home")

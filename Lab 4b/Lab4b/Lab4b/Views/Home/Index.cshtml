@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Lab4.Models.Movies>
+@{
+    Layout = "_Layout";
+}
+
+<style>
+    tr {
+        vertical-align: central;
+        text-align: center;
+    }
+</style>
+
+<div style="padding-bottom:9px; margin: 40px 0 20px; border-bottom: 1px solid #eee; box-sizing: border-box">
+    <h2>Home</h2>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-striped table-hover table-responsive" style="width: 100%">
+            @if (Model == null || Model.Count() == 0)
+            {
+                <tbody>
+                    <tr>
+                        <td colspan="6">There are no movies in your database.<br /><br /></td>
+                    </tr>
+                </tbody>
+            }
+            else
+            {
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Movie Title</th>
+                        <th>Movie SubTitle</th>
+                        <th>Description</th>
+                        <th>Year</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            <a asp-controller="Home" 
+                               asp-action="EditMovie"
+                               asp-route-id="@item.MovieId"
+                               class="btn btn-sm btn-primary">Edit</a>
+                        </td>
+                        <td>@item.Title</td>
+                        <td>@item.SubTitle</td>
+                        <td>@item.Description</td>
+                        <td>@item.Year</td>
+                        <td>@item.Rating/5</td>
+                        <td>
+                            <a asp-controller="Home"
+                               asp-action="DeleteMovie"
+                               asp-route-id="@item.MovieId"
+                               class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            }
+        </table>
+    </div>
+</div>
